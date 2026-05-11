@@ -1,9 +1,137 @@
-\chapter*[Introdução]{Introdução}
-\addcontentsline{toc}{chapter}{Introdução}
+\chapter{Introdução}
 
-Este documento apresenta considerações gerais e preliminares relacionadas 
-à redação de relatórios de Projeto de Graduação da Faculdade UnB Gama 
-(FGA). São abordados os diferentes aspectos sobre a estrutura do trabalho, 
-uso de programas de auxilio a edição, tiragem de cópias, encadernação, etc.
+Os serviços públicos compõem uma das formas mais diretas de relacionamento entre
+Estado e cidadão. Solicitar um documento, acompanhar um benefício, obter
+autorização, registrar uma demanda ou acessar uma política pública são situações
+em que a experiência do usuário passa a representar, de forma concreta, a
+qualidade percebida da administração pública. Com a ampliação do governo digital,
+essa relação deixou de ocorrer apenas em balcões presenciais e passou a envolver
+portais, aplicativos, integrações e fluxos de atendimento mediados por tecnologia.
 
-Este template é uma adaptação do ABNTeX2\footnote{\url{https://github.com/abntex/abntex2/}}.
+No Brasil, a avaliação dos serviços públicos ganhou relevância tanto por razões
+legais quanto por razões de gestão. A Lei n\textsuperscript{o} 13.460/2017
+dispõe sobre participação, proteção e defesa dos direitos dos usuários de
+serviços públicos e prevê que a avaliação dos serviços deve subsidiar a
+reorientação e o ajuste da prestação estatal \cite{brasil2017lei13460}. O
+Decreto n\textsuperscript{o} 9.094/2017, posteriormente atualizado, reforça o uso
+de ferramenta de pesquisa de satisfação dos usuários no âmbito do Poder Executivo
+federal \cite{brasil2017decreto9094}. A Lei n\textsuperscript{o} 14.129/2021,
+por sua vez, associa governo digital, eficiência pública, desburocratização,
+inovação e participação do cidadão \cite{brasil2021lei14129}.
+
+Essa transformação também elevou as expectativas dos cidadãos. Em ambientes
+privados, plataformas digitais de consumo popularizaram avaliações rápidas por
+nota, estrelas, comentários e critérios objetivos logo após o uso de um serviço.
+Neste trabalho, a expressão ``avaliador de serviços públicos'' é empregada nesse
+sentido: um mecanismo digital pelo qual o usuário possa avaliar um serviço
+público consumido, de modo semelhante à lógica de avaliação encontrada em
+aplicações como plataformas de entrega, mas adaptado às especificidades da
+administração pública, da cidadania, da transparência e da melhoria contínua dos
+serviços.
+
+\section{Contextualização}
+
+A literatura e os relatórios técnicos sobre avaliação de serviços públicos
+indicam que avaliar não deve se limitar a coletar uma opinião isolada do usuário.
+Em serviços, qualidade e satisfação estão relacionadas à comparação entre aquilo
+que foi prometido ou esperado e aquilo que foi efetivamente experimentado durante
+a jornada de consumo \cite{limaPereira2020modulo1}. Assim, uma avaliação útil
+precisa captar a percepção do cidadão, mas também organizar essa percepção em
+atributos capazes de orientar decisões de gestão.
+
+O Modelo Brasileiro de Avaliação de Serviços Públicos, conhecido como BRASP,
+foi construído para avaliar a percepção de qualidade de serviços governamentais
+considerando modalidades presenciais, digitizadas e parcialmente digitizadas
+\cite{silva2019brasp}. Em seguida, propostas de unificação buscaram aproximar
+qualidade técnica, qualidade percebida, efetividade e satisfação do usuário, com
+o objetivo de tornar a coleta de dados menos onerosa e mais útil para a melhoria
+dos serviços \cite{silva2022modeloUnificado}. Também há experiências ligadas ao
+portal gov.br e à API de avaliação, nas quais o cidadão informa sua satisfação e
+indica atributos relacionados à experiência, como clareza das informações,
+facilidade de uso, tempo para obtenção do serviço, disponibilidade e eficácia
+\cite{silva2024atributosApi}.
+
+Nesse contexto, este TCC parte da ideia de que um avaliador de serviços públicos
+pode funcionar como ponte entre duas necessidades: de um lado, a necessidade do
+cidadão de registrar uma avaliação simples, compreensível e de baixo esforço; de
+outro, a necessidade do gestor público de receber dados estruturados, comparáveis
+e úteis para priorizar melhorias. A inspiração em sistemas de avaliação de
+serviços privados, como avaliações por estrelas e comentários objetivos, não
+significa transferir diretamente uma lógica comercial para o setor público. O
+desafio é adaptar essa experiência de uso para finalidades públicas: participação
+social, accountability, qualidade de atendimento, transparência e melhoria
+contínua.
+
+\section{Problema de Pesquisa}
+
+Embora existam instrumentos oficiais e modelos consolidados de avaliação, ainda
+há desafios relacionados à simplicidade da coleta, à adesão do usuário e à
+transformação das respostas em informação acionável para o gestor. Avaliações
+muito extensas podem reduzir a participação; avaliações excessivamente simples
+podem gerar indicadores pouco explicativos; e avaliações sem devolutiva ou sem
+organização por atributos tendem a produzir dados difíceis de converter em
+melhoria.
+
+Diante disso, este trabalho parte da seguinte questão de pesquisa: como propor
+um avaliador de serviços públicos, inspirado na experiência simples de avaliação
+de plataformas digitais privadas, capaz de coletar satisfação e qualidade
+percebida dos usuários e apoiar a identificação de pontos de melhoria nos
+serviços avaliados?
+
+\section{Objetivo Geral}
+
+Propor e desenvolver um protótipo inicial de avaliador de serviços públicos
+centrado no usuário, capaz de coletar avaliações de satisfação e qualidade
+percebida por meio de notas, comentários e atributos objetivos, oferecendo
+informações organizadas para apoiar a melhoria dos serviços públicos.
+
+\section{Objetivos Específicos}
+
+Para alcançar o objetivo geral, definem-se os seguintes objetivos específicos:
+
+\begin{itemize}
+    \item levantar conceitos, modelos e critérios de avaliação de serviços
+    públicos, com ênfase em satisfação, qualidade percebida, efetividade e
+    melhoria contínua;
+    \item analisar referências nacionais, como o BRASP, a API de avaliação do
+    gov.br e propostas de modelo unificado de avaliação;
+    \item identificar atributos de avaliação adequados a um sistema simples de
+    avaliação pelo usuário, como clareza das informações, facilidade de uso,
+    tempo, esforço, disponibilidade, atendimento e eficácia;
+    \item definir requisitos iniciais para um avaliador de serviços públicos
+    inspirado em plataformas de avaliação por nota, estrelas e comentários;
+    \item construir um protótipo funcional que permita ao cidadão registrar uma
+    avaliação e ao gestor visualizar dados agregados;
+    \item avaliar, de forma preliminar, se o protótipo atende ao propósito de
+    coletar percepções de maneira simples e organizar informações úteis para
+    melhoria do serviço.
+\end{itemize}
+
+\section{Justificativa}
+
+A criação de mecanismos digitais de avaliação pode fortalecer a participação do
+usuário na melhoria dos serviços públicos. Segundo os materiais da Enap, a
+avaliação centrada no cidadão ganhou impulso com a transformação digital, pois
+desloca o foco das ferramentas tecnológicas para as necessidades, demandas e
+satisfação dos usuários \cite{limaPereira2020modulo1}. A avaliação também serve
+como ponto de partida para ciclos de melhoria, uma vez que seus resultados podem
+indicar problemas recorrentes, atributos críticos e prioridades de intervenção
+\cite{limaPereira2020modulo4}.
+
+Do ponto de vista prático, o tema é relevante porque muitos cidadãos já estão
+familiarizados com avaliações rápidas em plataformas privadas. Aproveitar essa
+linguagem de interação, sem perder os cuidados próprios do setor público, pode
+reduzir barreiras de participação e tornar a coleta mais intuitiva. Do ponto de
+vista acadêmico, o trabalho contribui ao aproximar modelos de qualidade de
+serviço, avaliação de governo digital e experiência do usuário em uma proposta
+aplicada de sistema.
+
+\section{Escopo Inicial}
+
+O escopo inicial deste TCC concentra-se na proposta e prototipação de um
+avaliador de serviços públicos. A proposta não pretende substituir instrumentos
+oficiais de avaliação já existentes, mas explorar uma solução complementar,
+orientada por baixo esforço de resposta, organização por atributos e visualização
+dos resultados. A validação prevista para esta etapa será preliminar, podendo
+ocorrer por análise do protótipo, simulação de uso ou avaliação com usuários em
+cenário controlado, conforme a evolução metodológica do trabalho.
