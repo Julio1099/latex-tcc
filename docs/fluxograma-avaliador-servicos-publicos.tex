@@ -1,0 +1,21 @@
+\documentclass[a4paper]{article}
+\usepackage[margin=0pt]{geometry}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{eso-pic}
+
+\definecolor{diagrambackground}{HTML}{111315}
+\pagecolor{diagrambackground}
+\pagestyle{empty}
+
+\newcommand{\diagramPage}[1]{%
+  \noindent\includegraphics[width=\paperwidth]{#1}%
+  \clearpage
+}
+
+\begin{document}
+\diagramPage{fluxograma-avaliador-servicos-publicos-pagina-01.png}
+\diagramPage{fluxograma-avaliador-servicos-publicos-pagina-02.png}
+\diagramPage{fluxograma-avaliador-servicos-publicos-pagina-03.png}
+\diagramPage{fluxograma-avaliador-servicos-publicos-pagina-04.png}
+\end{document}

@@ -15,6 +15,14 @@ Servidor padrão:
 http://127.0.0.1:8080
 ```
 
+Acesse a raiz do servidor no navegador para abrir o painel web do protótipo:
+
+```text
+http://127.0.0.1:8080/
+```
+
+Esse painel permite conferir o status da API, listar serviços, simular cliques, registrar tempo alto, abrir o feedback demo e visualizar dados administrativos.
+
 O banco SQLite é criado automaticamente em:
 
 ```text

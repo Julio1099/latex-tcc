@@ -4,7 +4,7 @@ Este fluxograma descreve a proposta atual do TCC: criar um mecanismo próprio pa
 
 ```mermaid
 flowchart TD
-    A["Usuário acessa página inicial, órgão público ou página de serviço"] --> B["Script cliente inicia sessão anônima ou identificada"]
+    A["Usuário acessa página inicial do órgão público ou página de serviço"] --> B["Script cliente inicia sessão anônima ou identificada"]
     B --> C["API registra clique, página, serviço, origem e instante"]
     C --> D["API atualiza métricas da sessão: total de cliques, páginas visitadas e tempo"]
     D --> E{"Cliques ou tempo acima da faixa esperada?"}

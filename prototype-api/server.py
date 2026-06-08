@@ -322,7 +322,9 @@ class Handler(BaseHTTPRequestHandler):
     def do_GET(self) -> None:
         route = urlparse(self.path)
         try:
-            if route.path == "/health":
+            if route.path in ("/", "/index.html"):
+                self.handle_home_page()
+            elif route.path == "/health":
                 self.send_json({"status": "ok", "database": str(DB_PATH)})
             elif route.path == "/api/services":
                 self.handle_get_services()
@@ -567,8 +569,336 @@ class Handler(BaseHTTPRequestHandler):
         html = feedback_html(session_id=session_id, service_id=service_id)
         self.send_html(html)
 
+    def handle_home_page(self) -> None:
+        self.send_html(home_html())
+
     def log_message(self, format: str, *args: object) -> None:
         return
+
+
+def home_html() -> str:
+    return """<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Avaliador de Serviços Públicos</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f4f7fb;
+      --panel: #ffffff;
+      --border: #d7dfeb;
+      --text: #172033;
+      --muted: #5f6d80;
+      --primary: #1f6feb;
+      --danger: #b42318;
+      --success: #087443;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    header {
+      padding: 22px 28px;
+      background: #111827;
+      color: #fff;
+    }
+    header h1 {
+      margin: 0 0 6px;
+      font-size: 24px;
+    }
+    header p {
+      margin: 0;
+      color: #cbd5e1;
+    }
+    main {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 24px;
+      display: grid;
+      grid-template-columns: minmax(280px, 420px) 1fr;
+      gap: 18px;
+    }
+    section {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    h2 {
+      margin: 0 0 14px;
+      font-size: 18px;
+    }
+    label {
+      display: block;
+      margin: 12px 0 6px;
+      font-weight: 700;
+    }
+    select, input, textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #b8c4d4;
+      border-radius: 6px;
+      font: inherit;
+    }
+    button, a.button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 38px;
+      margin: 8px 8px 0 0;
+      padding: 9px 13px;
+      border: 0;
+      border-radius: 6px;
+      background: var(--primary);
+      color: #fff;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    button.secondary, a.secondary { background: #334155; }
+    button.ghost, a.ghost {
+      background: #fff;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .status {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      background: #fee2e2;
+      color: var(--danger);
+    }
+    .status.ok {
+      background: #dcfce7;
+      color: var(--success);
+    }
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .metric {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      background: #f8fafc;
+    }
+    .metric strong {
+      display: block;
+      font-size: 24px;
+      margin-bottom: 4px;
+    }
+    pre {
+      margin: 12px 0 0;
+      padding: 12px;
+      overflow: auto;
+      max-height: 360px;
+      background: #0f172a;
+      color: #dbeafe;
+      border-radius: 8px;
+      font-size: 13px;
+      white-space: pre-wrap;
+    }
+    .muted { color: var(--muted); }
+    .full { grid-column: 1 / -1; }
+    @media (max-width: 860px) {
+      main { grid-template-columns: 1fr; padding: 14px; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Avaliador de Serviços Públicos</h1>
+    <p>Protótipo local para registrar cliques, detectar dificuldade e coletar feedback.</p>
+  </header>
+
+  <main>
+    <section>
+      <h2>Status do servidor</h2>
+      <p><span id="server-status" class="status">verificando</span></p>
+      <p class="muted" id="database-path"></p>
+      <div class="links">
+        <a class="button ghost" href="/health">/health</a>
+        <a class="button ghost" href="/api/services">/api/services</a>
+        <a class="button ghost" href="/api/admin/dashboard">/api/admin/dashboard</a>
+        <a class="button ghost" href="/api/admin/alerts">/api/admin/alerts</a>
+      </div>
+    </section>
+
+    <section>
+      <h2>Resumo administrativo</h2>
+      <div class="grid">
+        <div class="metric">
+          <strong id="total-alerts">0</strong>
+          <span>Alertas registrados</span>
+        </div>
+        <div class="metric">
+          <strong id="service-count">0</strong>
+          <span>Serviços monitorados</span>
+        </div>
+        <div class="metric">
+          <strong id="session-count">0</strong>
+          <span>Sessões afetadas</span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Simular navegação</h2>
+      <label for="service">Serviço</label>
+      <select id="service"></select>
+      <label for="session">Sessão</label>
+      <input id="session" value="sessao-demo-local">
+      <button id="click-once">Registrar clique</button>
+      <button id="click-many" class="secondary">Gerar 7 cliques</button>
+      <button id="time-high" class="secondary">Registrar tempo alto</button>
+      <a id="feedback-link" class="button ghost" href="/feedback?session_id=sessao-demo-local&service_id=imposto-renda">Abrir feedback demo</a>
+      <pre id="last-response">{}</pre>
+    </section>
+
+    <section>
+      <h2>Alertas recentes</h2>
+      <button id="refresh" class="ghost">Atualizar painel</button>
+      <pre id="alerts">[]</pre>
+    </section>
+
+    <section class="full">
+      <h2>Dashboard bruto</h2>
+      <pre id="dashboard">{}</pre>
+    </section>
+  </main>
+
+  <script>
+    const statusEl = document.querySelector("#server-status");
+    const databasePath = document.querySelector("#database-path");
+    const serviceSelect = document.querySelector("#service");
+    const sessionInput = document.querySelector("#session");
+    const feedbackLink = document.querySelector("#feedback-link");
+    const lastResponse = document.querySelector("#last-response");
+    const alertsEl = document.querySelector("#alerts");
+    const dashboardEl = document.querySelector("#dashboard");
+
+    function showJson(element, data) {
+      element.textContent = JSON.stringify(data, null, 2);
+    }
+
+    async function getJson(url) {
+      const response = await fetch(url);
+      if (!response.ok) throw new Error(`${url} retornou ${response.status}`);
+      return response.json();
+    }
+
+    async function loadStatus() {
+      try {
+        const health = await getJson("/health");
+        statusEl.textContent = "online";
+        statusEl.classList.add("ok");
+        databasePath.textContent = `Banco SQLite: ${health.database}`;
+      } catch (error) {
+        statusEl.textContent = "offline";
+        statusEl.classList.remove("ok");
+        databasePath.textContent = error.message;
+      }
+    }
+
+    async function loadServices() {
+      const services = await getJson("/api/services");
+      serviceSelect.innerHTML = services.map((service) => (
+        `<option value="${service.id}">${service.name}</option>`
+      )).join("");
+      updateFeedbackLink();
+      document.querySelector("#service-count").textContent = services.length;
+    }
+
+    async function refreshDashboard() {
+      const dashboard = await getJson("/api/admin/dashboard");
+      const alerts = await getJson("/api/admin/alerts");
+      showJson(dashboardEl, dashboard);
+      showJson(alertsEl, alerts);
+      document.querySelector("#total-alerts").textContent = dashboard.total_alerts ?? 0;
+      const sessions = (dashboard.service_metrics || []).reduce(
+        (total, item) => total + Number(item.affected_sessions || 0),
+        0
+      );
+      document.querySelector("#session-count").textContent = sessions;
+    }
+
+    function updateFeedbackLink() {
+      feedbackLink.href = `/feedback?session_id=${encodeURIComponent(sessionInput.value)}&service_id=${encodeURIComponent(serviceSelect.value)}`;
+    }
+
+    async function registerClick() {
+      updateFeedbackLink();
+      const response = await fetch("/api/events/click", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          session_id: sessionInput.value,
+          page_id: "home-gov-demo",
+          page_type: "home",
+          service_id: serviceSelect.value,
+          url: location.href,
+          x: Math.floor(Math.random() * 900),
+          y: Math.floor(Math.random() * 700)
+        })
+      });
+      const data = await response.json();
+      showJson(lastResponse, data);
+      await refreshDashboard();
+      return data;
+    }
+
+    async function registerManyClicks() {
+      let data = {};
+      for (let i = 0; i < 7; i += 1) data = await registerClick();
+      showJson(lastResponse, data);
+    }
+
+    async function registerHighTime() {
+      updateFeedbackLink();
+      const response = await fetch("/api/events/page-time", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          session_id: sessionInput.value,
+          service_id: serviceSelect.value,
+          page_id: "home-gov-demo",
+          duration_seconds: 120
+        })
+      });
+      const data = await response.json();
+      showJson(lastResponse, data);
+      await refreshDashboard();
+    }
+
+    document.querySelector("#click-once").addEventListener("click", registerClick);
+    document.querySelector("#click-many").addEventListener("click", registerManyClicks);
+    document.querySelector("#time-high").addEventListener("click", registerHighTime);
+    document.querySelector("#refresh").addEventListener("click", refreshDashboard);
+    serviceSelect.addEventListener("change", updateFeedbackLink);
+    sessionInput.addEventListener("input", updateFeedbackLink);
+
+    loadStatus()
+      .then(loadServices)
+      .then(refreshDashboard)
+      .catch((error) => showJson(lastResponse, { error: error.message }));
+  </script>
+</body>
+</html>"""
 
 
 def feedback_html(session_id: str, service_id: str) -> str:
