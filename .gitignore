@@ -19,3 +19,8 @@
 *.brf
 *.toc
 *.idx
+
+# local prototype data
+prototype-api/*.db
+prototype-api/*.db-*
+prototype-api/__pycache__/

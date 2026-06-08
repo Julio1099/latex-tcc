@@ -1,0 +1,5 @@
+$pdf_mode = 2;
+$latex = 'latex -interaction=nonstopmode %O %S';
+$bibtex = 'bibtex %O %B';
+$dvips = 'dvips %O -o %D %S';
+$ps2pdf = 'ps2pdf %O %S %D';
