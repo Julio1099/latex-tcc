@@ -2409,6 +2409,22 @@ def feedback_html(session_id: str, service_id: str) -> str:
         f'<label><input type="checkbox" name="traits" value="{value}"> {label}</label>'
         for value, label in traits
     )
+    star_inputs = "\n".join(
+        f"""
+          <label class="rating-option" data-rating="{value}" aria-label="{value} de 5 - {label}">
+            <input type="radio" name="stars" value="{value}">
+            <span class="rating-star">★</span>
+            <span class="rating-text">{label}</span>
+          </label>
+        """
+        for value, label in [
+            (1, "Péssima"),
+            (2, "Ruim"),
+            (3, "Ok"),
+            (4, "Boa"),
+            (5, "Excelente"),
+        ]
+    )
 
     return f"""<!doctype html>
 <html lang="pt-BR">
@@ -2434,7 +2450,87 @@ def feedback_html(session_id: str, service_id: str) -> str:
     h1 {{ font-size: 24px; margin: 0 0 18px; }}
     fieldset {{ border: 0; padding: 0; margin: 22px 0; }}
     legend {{ font-weight: 700; margin-bottom: 10px; }}
-    .stars label {{ font-size: 28px; cursor: pointer; margin-right: 8px; }}
+    .rating-field {{
+      margin-top: 18px;
+    }}
+    .rating-heading {{
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 8px;
+    }}
+    .rating-caption {{
+      color: #64748b;
+      font-size: 14px;
+      font-weight: 700;
+    }}
+    .rating-options {{
+      display: grid;
+      grid-template-columns: repeat(5, minmax(70px, 1fr));
+      gap: 10px;
+      max-width: 520px;
+    }}
+    .rating-option {{
+      position: relative;
+      min-height: 88px;
+      padding: 12px 8px 10px;
+      border: 1px solid #d4dbe7;
+      border-radius: 8px;
+      background: #fff;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
+    }}
+    .rating-option input {{
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+    }}
+    .rating-star {{
+      color: #cbd5e1;
+      font-size: 38px;
+      line-height: 1;
+      transition: color 0.15s ease, transform 0.15s ease;
+    }}
+    .rating-text {{
+      color: #64748b;
+      font-size: 12px;
+      font-weight: 700;
+    }}
+    .rating-option.active,
+    .rating-option.preview {{
+      border-color: #f6b300;
+      background: #fff8e1;
+    }}
+    .rating-option.active .rating-star,
+    .rating-option.preview .rating-star {{
+      color: #f6b300;
+      transform: scale(1.05);
+    }}
+    .rating-option.active .rating-text,
+    .rating-option.preview .rating-text {{
+      color: #7a4c00;
+    }}
+    .rating-option:focus-within {{
+      outline: 3px solid rgba(31, 111, 235, 0.25);
+      outline-offset: 2px;
+    }}
+    .rating-error {{
+      display: none;
+      color: #b42318;
+      font-size: 14px;
+      margin: 10px 0 0;
+      font-weight: 700;
+    }}
+    .rating-error.active {{
+      display: block;
+    }}
     .traits label {{ display: block; margin: 8px 0; }}
     textarea, select {{
       width: 100%;
@@ -2453,19 +2549,43 @@ def feedback_html(session_id: str, service_id: str) -> str:
       cursor: pointer;
     }}
     #status {{ margin-top: 16px; font-weight: 700; }}
+    @media (max-width: 560px) {{
+      main {{
+        margin: 0;
+        min-height: 100vh;
+        border: 0;
+        border-radius: 0;
+      }}
+      .rating-options {{
+        grid-template-columns: repeat(5, minmax(48px, 1fr));
+        gap: 6px;
+      }}
+      .rating-option {{
+        min-height: 74px;
+        padding: 8px 4px;
+      }}
+      .rating-star {{
+        font-size: 31px;
+      }}
+      .rating-text {{
+        font-size: 10px;
+      }}
+    }}
   </style>
 </head>
 <body>
   <main>
     <h1>Como foi sua experiência?</h1>
     <form id="feedback-form">
-      <fieldset class="stars">
-        <legend>Avaliação geral</legend>
-        <label><input type="radio" name="stars" value="1" required>★</label>
-        <label><input type="radio" name="stars" value="2">★</label>
-        <label><input type="radio" name="stars" value="3">★</label>
-        <label><input type="radio" name="stars" value="4">★</label>
-        <label><input type="radio" name="stars" value="5">★</label>
+      <fieldset class="rating-field">
+        <div class="rating-heading">
+          <legend>Avaliação geral</legend>
+          <span id="rating-caption" class="rating-caption">Toque em uma nota</span>
+        </div>
+        <div class="rating-options" role="radiogroup" aria-label="Avaliação geral">
+          {star_inputs}
+        </div>
+        <p id="rating-error" class="rating-error">Escolha uma nota para continuar.</p>
       </fieldset>
 
       <fieldset class="traits">
@@ -2495,10 +2615,58 @@ def feedback_html(session_id: str, service_id: str) -> str:
   <script>
     const form = document.querySelector("#feedback-form");
     const status = document.querySelector("#status");
+    const ratingOptions = Array.from(document.querySelectorAll(".rating-option"));
+    const ratingCaption = document.querySelector("#rating-caption");
+    const ratingError = document.querySelector("#rating-error");
+    const ratingLabels = {{
+      1: "Péssima",
+      2: "Ruim",
+      3: "Ok",
+      4: "Boa",
+      5: "Excelente"
+    }};
+
+    function paintRating(value, mode = "active") {{
+      ratingOptions.forEach((option) => {{
+        const rating = Number(option.dataset.rating);
+        option.classList.toggle(mode, rating <= value);
+      }});
+    }}
+
+    function clearPreview() {{
+      ratingOptions.forEach((option) => option.classList.remove("preview"));
+    }}
+
+    function selectedRating() {{
+      return Number(form.querySelector('input[name="stars"]:checked')?.value || 0);
+    }}
+
+    ratingOptions.forEach((option) => {{
+      const input = option.querySelector("input");
+      option.addEventListener("mouseenter", () => {{
+        clearPreview();
+        paintRating(Number(option.dataset.rating), "preview");
+      }});
+      option.addEventListener("mouseleave", () => {{
+        clearPreview();
+      }});
+      input.addEventListener("change", () => {{
+        const value = Number(input.value);
+        ratingOptions.forEach((item) => item.classList.remove("active"));
+        paintRating(value);
+        ratingCaption.textContent = ratingLabels[value];
+        ratingError.classList.remove("active");
+      }});
+    }});
 
     form.addEventListener("submit", async (event) => {{
       event.preventDefault();
       const data = new FormData(form);
+      if (!selectedRating()) {{
+        ratingError.classList.add("active");
+        status.textContent = "";
+        return;
+      }}
       const payload = {{
         session_id: "{session_id}",
         service_id: "{service_id}",
