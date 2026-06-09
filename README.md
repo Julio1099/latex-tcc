@@ -1,7 +1,7 @@
-# Template TCC FGA-UnB
+# Template TCC FCTE-UnB
 
 Template para Trabalhos de Conclusão de Cursos (TCC) na Faculdade do
-Gama (FGA) em Latex.
+Gama, atual Faculdade de Ciências e Tecnologias em Engenharia (FCTE), em Latex.
 
 Licenciado em Creative Commons Atribuição 3.0:
 http://creativecommons.org/licenses/by/3.0/

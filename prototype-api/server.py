@@ -1794,6 +1794,7 @@ def prototype_script(page_id: str, page_type: str, service_id: str) -> str:
     const redirectButton = document.querySelector("#redirect-accept");
     const dismissButton = document.querySelector("#redirect-dismiss");
     let pendingRedirectService = "";
+    let pendingRedirectKey = "";
 
     if (sessionEl) sessionEl.textContent = sessionId;
 
@@ -1817,7 +1818,16 @@ def prototype_script(page_id: str, page_type: str, service_id: str) -> str:
 
     function showRedirectPopup(action) {
       if (!modal) return;
-      pendingRedirectService = action.target_service_id || SERVICE_ID;
+      const targetService = action.target_service_id || SERVICE_ID;
+      const reason = action.reason || "redirect";
+      const redirectKey = `avaliador_redirect_popup_seen:${sessionId}:${targetService}:${reason}`;
+      if (localStorage.getItem(redirectKey) === "1") {
+        setAction("Sugestão de redirecionamento já exibida nesta sessão.");
+        return;
+      }
+      pendingRedirectService = targetService;
+      pendingRedirectKey = redirectKey;
+      localStorage.setItem(redirectKey, "1");
       modalMessage.textContent = action.message || "Deseja ir direto para o serviço indicado?";
       modal.classList.add("active");
     }
@@ -1896,10 +1906,12 @@ def prototype_script(page_id: str, page_type: str, service_id: str) -> str:
     });
 
     redirectButton?.addEventListener("click", () => {
+      if (pendingRedirectKey) localStorage.setItem(pendingRedirectKey, "1");
       window.location.href = localServiceUrl(pendingRedirectService);
     });
 
     dismissButton?.addEventListener("click", () => {
+      if (pendingRedirectKey) localStorage.setItem(pendingRedirectKey, "1");
       modal.classList.remove("active");
       setAction("Usuário recusou o redirecionamento sugerido.");
     });

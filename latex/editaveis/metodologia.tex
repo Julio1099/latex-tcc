@@ -1,0 +1,176 @@
+\chapter{Metodologia}
+
+Este capítulo descreve o caminho metodológico adotado para transformar o tema do
+avaliador de serviços públicos em uma proposta de solução. A metodologia foi
+organizada em três partes: metodologia do trabalho, metodologia de
+desenvolvimento da solução e solução de análise e desenvolvimento de dados.
+
+\section{Metodologia do Trabalho}
+
+Este TCC possui natureza aplicada, pois busca construir uma solução computacional
+para um problema relacionado à melhoria de serviços públicos digitais. Quanto aos
+objetivos, a pesquisa é exploratória, uma vez que parte de modelos e normas já
+existentes para propor um artefato inicial, ainda sujeito a validação e
+refinamento.
+
+A condução do trabalho segue uma abordagem inspirada em Design Science Research.
+Segundo \citeonline{hevner2004designscience}, pesquisas em sistemas de
+informação podem produzir conhecimento por meio da construção e avaliação de
+artefatos, como modelos, métodos, arquiteturas e sistemas. A proposta deste TCC
+se enquadra nessa lógica porque o resultado principal é um protótipo de API e
+interface que materializa uma forma de coletar e analisar sinais de dificuldade
+em serviços públicos digitais.
+
+As etapas metodológicas adotadas foram:
+
+\begin{enumerate}
+    \item revisão de bases legais, modelos de avaliação de serviços públicos,
+    conceitos de qualidade percebida, satisfação, usabilidade e governo digital;
+    \item definição do problema e dos objetivos com foco em coleta de feedback de
+    baixo esforço e identificação de sinais de dificuldade durante a navegação;
+    \item elaboração do fluxo conceitual da solução, contemplando registro de
+    cliques, análise de tempo, sugestão de redirecionamento e coleta de feedback;
+    \item construção de um protótipo funcional com API, páginas simuladas de
+    serviço público, formulário de avaliação e painel administrativo;
+    \item organização dos dados coletados em indicadores capazes de apoiar a
+    análise de sessões críticas, avaliações, NPS e características recorrentes;
+    \item verificação preliminar por simulação, observando se o fluxo proposto é
+    coerente com os objetivos e se o protótipo permite demonstrar a ideia central.
+\end{enumerate}
+
+A revisão teórica não teve como finalidade esgotar a literatura sobre qualidade
+de serviços. Ela foi direcionada à construção da solução. Foram priorizadas
+fontes normativas brasileiras, modelos de avaliação de serviços públicos, bases
+de usabilidade, design centrado no usuário, métricas de serviços digitais e
+referências de desenvolvimento de software.
+
+\section{Metodologia do Desenvolvimento da Solução}
+
+O desenvolvimento da solução foi conduzido por prototipação incremental. Essa
+estratégia é adequada quando os requisitos ainda estão em amadurecimento e
+quando o artefato precisa ser demonstrado rapidamente para discussão e ajuste.
+Em engenharia de software, protótipos permitem explorar requisitos, reduzir
+incertezas e comunicar alternativas de solução antes de uma implementação
+definitiva \cite{Sommerville2007}.
+
+O protótipo foi organizado em quatro componentes principais:
+
+\begin{itemize}
+    \item \textbf{páginas públicas simuladas}: telas que representam uma página
+    inicial de órgão público e páginas de serviço, com estrutura visual mais
+    próxima de portais governamentais reais;
+    \item \textbf{script cliente}: código executado no navegador para iniciar uma
+    sessão, registrar cliques, registrar tempo de permanência e enviar eventos
+    para a API;
+    \item \textbf{API de avaliação}: backend responsável por receber eventos,
+    atualizar métricas da sessão, aplicar regras de dificuldade e devolver ações
+    para o frontend;
+    \item \textbf{interfaces de retorno}: popup de sugestão de redirecionamento,
+    página de feedback e painel administrativo com dados agregados.
+\end{itemize}
+
+O fluxo funcional definido para o protótipo parte do acesso do usuário à página
+inicial do órgão ou à página de um serviço. A partir desse acesso, o script
+cliente inicia uma sessão anônima ou identificada, registra eventos de clique e
+envia os dados para a API. A API atualiza métricas da sessão, como quantidade de
+cliques, páginas visitadas e tempo de permanência. Quando cliques ou tempo ficam
+acima da faixa esperada, a dificuldade é registrada silenciosamente para o
+administrador.
+
+Serviços marcados como prioritários ou de alto tráfego recebem tratamento
+adicional. Se o usuário apresenta sinais de dificuldade procurando um serviço
+desse tipo, a API pode retornar uma ação de popup sugerindo o redirecionamento
+para a página correta. Caso o usuário aceite, o frontend realiza o
+redirecionamento; caso recuse, a navegação continua. Para evitar interrupções
+repetitivas, o popup deve ser exibido apenas uma vez por sessão, serviço e motivo
+de acionamento.
+
+Quando a sessão apresenta dificuldade ou tempo acima da média, a API pode
+retornar uma ação para abrir a página de feedback. O formulário utiliza uma
+escala de estrelas para avaliação geral, seleção de características do problema
+e uma pergunta de NPS. A decisão por estrelas e características objetivas busca
+reduzir o esforço de resposta e, ao mesmo tempo, qualificar a causa da
+insatisfação. A pergunta de NPS foi incluída como indicador complementar de
+recomendação, tomando como base a simplicidade do método proposto por
+\citeonline{reichheld2003nps}.
+
+\section{Solução de Análise e Desenvolvimento de Dados}
+
+A solução de dados foi definida para responder a duas perguntas administrativas:
+onde o usuário demonstra dificuldade e quais aspectos do serviço precisam ser
+priorizados. Para isso, o protótipo combina dados comportamentais, coletados
+durante a navegação, e dados declarativos, informados pelo usuário no feedback.
+
+Os dados comportamentais incluem identificador de sessão, página acessada,
+serviço associado, origem do evento, instante, coordenadas aproximadas do clique,
+quantidade acumulada de cliques e tempo de permanência. Esses dados permitem
+detectar sessões com esforço acima do esperado. Os dados declarativos incluem
+nota por estrelas, características selecionadas, NPS e comentário opcional. Essa
+combinação segue a ideia de que satisfação e qualidade percebida devem ser
+interpretadas por atributos, e não apenas por uma nota geral
+\cite{silva2024atributosApi,iso9241112018}.
+
+\begin{table}[h]
+\centering
+\caption{Dados previstos no protótipo}
+\label{tab:dados-prototipo}
+\begin{tabular}{p{3.4cm} p{5.0cm} p{5.0cm}}
+\hline
+\textbf{Grupo de dados} & \textbf{Exemplos} & \textbf{Uso esperado} \\
+\hline
+Navegação & Sessão, página, serviço, clique, tempo e origem & Detectar esforço
+acima da faixa esperada e registrar dificuldade silenciosa \\
+Feedback & Estrelas, atributos, NPS e comentário opcional & Explicar a percepção
+do usuário e identificar pontos recorrentes de melhoria \\
+Administração & Alertas, sessões críticas, médias, distribuições e recorrência
+de atributos & Apoiar priorização, acompanhamento e tomada de decisão \\
+\hline
+\end{tabular}
+\end{table}
+
+As regras de análise do protótipo são configuráveis. Cada serviço pode possuir
+uma faixa esperada de cliques e tempo, além de uma marcação de prioridade ou alto
+tráfego. Quando a faixa é ultrapassada, o sistema registra um alerta. Em serviços
+comuns, a navegação continua sem popup. Em serviços prioritários, a API pode
+sugerir redirecionamento. Essa diferenciação evita que todo sinal de dificuldade
+gere interrupção para o usuário.
+
+O painel administrativo deve apresentar os resultados de forma agregada. Entre os
+indicadores previstos estão: total de sessões, sessões com dificuldade, serviços
+com maior quantidade de alertas, média de estrelas, distribuição das notas, NPS,
+atributos mais selecionados e comentários recentes. A lógica acompanha a
+orientação de que métricas de serviços digitais devem ser usadas para acompanhar
+desempenho e identificar oportunidades de melhoria \cite{govuk2021usingData}.
+
+Do ponto de vista de privacidade, a solução foi pensada para trabalhar com
+sessões técnicas e dados agregados. A coleta de eventos deve ser limitada ao que
+é necessário para analisar a experiência do serviço, respeitando princípios de
+finalidade, adequação e necessidade previstos na LGPD \cite{brasil2018lgpd}. Em
+uma implantação real, seriam necessários mecanismos adicionais, como aviso de
+coleta, governança de dados, política de retenção, controle de acesso e avaliação
+jurídica.
+
+\section{Base de Fundamentação da Solução}
+
+A resposta à pergunta ``com o que a solução se baseou?'' pode ser organizada em
+cinco grupos de referência. O primeiro grupo é normativo: Lei
+n\textsuperscript{o} 13.460/2017, Decreto n\textsuperscript{o} 9.094/2017, Lei
+n\textsuperscript{o} 14.129/2021 e LGPD, que justificam avaliação, participação,
+governo digital e cuidado com dados. O segundo grupo é técnico-governamental:
+BRASP, Qualidade Gov.br, modelo unificado e estudo dos atributos da API de
+avaliação, que orientam qualidade percebida, satisfação, efetividade e atributos
+de serviço público.
+
+O terceiro grupo é de experiência do usuário: ISO 9241-11 e ISO 9241-210, usadas
+para fundamentar usabilidade e design centrado no usuário. O quarto grupo é de
+avaliação de sistemas e serviços digitais: DeLone e McLean e o Service Manual do
+GOV.UK, que sustentam o uso de métricas de uso, satisfação, conclusão e melhoria
+contínua. O quinto grupo é de desenvolvimento de software e pesquisa aplicada:
+Sommerville e Design Science Research, usados para justificar a construção de um
+protótipo como artefato de pesquisa.
+
+Assim, a proposta não se baseia apenas na comparação com aplicativos privados.
+As avaliações por estrelas, motivos e NPS são referências de interação de baixo
+esforço; a finalidade, os atributos, a análise dos dados e os cuidados de
+governança são fundamentados em avaliação de serviços públicos, governo digital,
+usabilidade, engenharia de software e proteção de dados.

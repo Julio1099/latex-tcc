@@ -24,10 +24,13 @@ prestação de contas e ao aperfeiçoamento da administração pública
 
 Com a digitalização, muitos serviços passaram a ser acessados por portais,
 aplicativos e sistemas integrados. Essa mudança amplia o alcance da prestação
-pública, mas também cria novas exigências de usabilidade, clareza, confiabilidade
-e disponibilidade. O usuário não avalia apenas o resultado final do serviço; ele
-também avalia o caminho percorrido, a linguagem utilizada, o esforço exigido, a
-facilidade de navegação e a capacidade do canal digital de resolver sua demanda.
+pública, mas também cria novas exigências de usabilidade, clareza,
+confiabilidade e disponibilidade. A usabilidade pode ser entendida como resultado
+de uso associado à efetividade, eficiência e satisfação em um contexto definido
+\cite{iso9241112018}. O usuário não avalia apenas o resultado final do serviço;
+ele também avalia o caminho percorrido, a linguagem utilizada, o esforço exigido,
+a facilidade de navegação e a capacidade do canal digital de resolver sua
+demanda.
 
 \section{Avaliação de Serviços}
 
@@ -156,13 +159,19 @@ de entrega deve ser entendida como inspiração de interação, e não como mode
 governança. Em uma plataforma privada, a avaliação frequentemente orienta
 reputação, consumo e concorrência. Em serviços públicos, ela deve orientar
 direitos, transparência, participação social e melhoria da entrega estatal.
+Mecanismos como o NPS, proposto originalmente como pergunta de lealdade e
+recomendação, também influenciaram práticas de avaliação de experiência por sua
+simplicidade de aplicação \cite{reichheld2003nps}.
 
 Mesmo com essa diferença, a familiaridade do usuário com mecanismos simples de
 avaliação pode ser aproveitada. Um avaliador de serviços públicos pode reduzir
 barreiras de participação se oferecer uma interface direta, com poucos passos e
 linguagem compreensível. A nota geral permite captar a percepção imediata; os
 atributos permitem interpretar os motivos; e comentários opcionais podem revelar
-problemas não previstos pelo formulário.
+problemas não previstos pelo formulário. Essa escolha está alinhada ao design
+centrado no usuário, que orienta o desenvolvimento de sistemas interativos a
+partir das necessidades, capacidades e limitações das pessoas que irão utilizá-los
+\cite{iso92412102019}.
 
 Para que a avaliação seja útil ao gestor, o sistema também precisa organizar os
 dados coletados. Isso envolve agrupar avaliações por serviço, período, órgão,
@@ -171,6 +180,35 @@ e permitir comparação temporal. A literatura de melhoria de serviços reforça
 as avaliações devem alimentar ciclos de melhoria contínua, funcionando como linha
 de base para decisões e como indicador para acompanhar a evolução do serviço
 \cite{limaPereira2020modulo4}.
+
+\section{Métricas de Navegação e Sinais de Dificuldade}
+
+Além do feedback declarado pelo usuário, serviços digitais podem ser avaliados
+por sinais observados durante a jornada. A taxa de conclusão, por exemplo, mede a
+proporção de transações iniciadas que chegam ao ponto definido como conclusão do
+serviço; sua leitura depende de identificar início, etapas intermediárias,
+abandono e término do fluxo \cite{govuk2021completionRate}. Métricas de tempo,
+cliques, páginas visitadas e retorno a etapas anteriores também podem indicar
+dificuldade quando comparadas a faixas esperadas.
+
+O uso dessas métricas aproxima a avaliação de serviços públicos da avaliação de
+sistemas de informação. O modelo de sucesso de sistemas de informação de
+\citeonline{deloneMclean2003} relaciona qualidade do sistema, qualidade da
+informação, qualidade do serviço, uso, satisfação do usuário e benefícios
+líquidos. Para a solução proposta, cliques e tempo de navegação funcionam como
+indícios de uso e esforço; estrelas, atributos e NPS funcionam como percepção
+declarada; e o painel administrativo busca transformar esses registros em
+benefícios para a gestão.
+
+O registro de eventos de navegação exige cuidado metodológico e jurídico. A
+coleta deve ser limitada ao necessário para a finalidade de melhoria do serviço,
+preferencialmente com sessão anônima ou identificador técnico sem exposição de
+dados pessoais. A Lei Geral de Proteção de Dados Pessoais estabelece princípios
+para o tratamento de dados, inclusive em meios digitais, com objetivo de proteger
+liberdade, privacidade e desenvolvimento da personalidade da pessoa natural
+\cite{brasil2018lgpd}. Por isso, a proposta deste TCC considera o registro de
+cliques e tempo como mecanismo de análise agregada, não como instrumento de
+vigilância individual.
 
 \section{Síntese do Referencial}
 
@@ -185,7 +223,8 @@ acompanhar a evolução dos serviços.
 
 Com base nesses princípios, este TCC propõe um avaliador inspirado em interfaces
 simples de plataformas digitais, mas fundamentado em modelos de avaliação de
-serviços públicos. A solução pretendida deve permitir que o usuário avalie um
-serviço de forma rápida e compreensível, enquanto os resultados agregados
+serviços públicos, usabilidade, design centrado no usuário e sucesso de sistemas
+de informação. A solução deve permitir que o usuário avalie um serviço de forma
+rápida e compreensível, enquanto eventos de navegação e resultados agregados
 oferecem ao gestor indícios sobre quais aspectos do serviço precisam de
 priorização e aperfeiçoamento.
