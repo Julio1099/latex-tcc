@@ -23,6 +23,35 @@ http://127.0.0.1:8080/
 
 Esse painel permite conferir o status da API, listar serviços, simular cliques, registrar tempo alto, abrir o feedback demo e visualizar dados administrativos.
 
+## Protótipo visual estilo Figma
+
+Além do painel administrativo, o servidor também entrega telas navegáveis para demonstrar a experiência do cidadão e a integração da API:
+
+```text
+http://127.0.0.1:8080/portal
+```
+
+Telas disponíveis:
+
+- `/portal`: página pública simulada com estrutura densa de portal governamental, incluindo barra institucional, acessibilidade, login, busca, menus com submenus, destaques, notícias, carta de serviços, aplicações aninhadas e conteúdo recente;
+- `/servico/imposto-renda`: página de serviço prioritário, usada para demonstrar popup de redirecionamento;
+- `/servico/servico-publico-generico`: página de serviço comum;
+- `/feedback?session_id=sessao-demo&service_id=imposto-renda`: formulário de feedback.
+
+Nas telas do protótipo há um painel lateral chamado **API em tempo real**. Ele mostra:
+
+- sessão anônima usada na navegação;
+- requisição enviada para `/api/events/click` ou `/api/events/page-time`;
+- resposta da API;
+- ação tomada pela API, como fluxo normal, popup de sugestão ou abertura de feedback.
+
+Regras atuais de demonstração:
+
+- `pagina-inicial-governo`: excesso a partir de 13 cliques; recomenda o serviço prioritário `Imposto de Renda`;
+- `imposto-renda`: excesso a partir de 11 cliques; serviço marcado como importante/alto tráfego;
+- `servico-publico-generico`: excesso a partir de 13 cliques; abre feedback sem popup prioritário;
+- tempo alto na página inicial também recomenda `Imposto de Renda` e abre feedback.
+
 O banco SQLite é criado automaticamente em:
 
 ```text
