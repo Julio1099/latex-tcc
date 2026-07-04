@@ -2,12 +2,100 @@
 
 \partapendices
 
-\chapter{Primeiro Apêndice}
+\chapter{Síntese da Lean Inception}
 
-Texto do primeiro apêndice.
+A Lean Inception foi usada como protocolo metodológico para definir o MVP do
+Avaliador de Serviços Públicos. A atividade reuniu quatro perspectivas: Felipe,
+atendimento público; Lucas, gestão digital; Diassis, viabilidade técnica; e
+Bruno, experiência do usuário.
 
-\chapter{Segundo Apêndice}
+\section*{Agenda}
 
-Texto do segundo apêndice.
+\begin{itemize}
+    \item Kick-off e visão do produto;
+    \item dinâmica É / Não É / Faz / Não Faz;
+    \item objetivos e hipótese do MVP;
+    \item personas de cidadão e gestor;
+    \item jornada do cidadão no serviço digital;
+    \item brainstorming de features contextuais;
+    \item revisão técnica, de negócio e UX;
+    \item sequenciador;
+    \item Canvas MVP.
+\end{itemize}
+
+\section*{Escopo Delimitado}
+
+O produto é uma solução de feedback contextual, anônima e agregada, voltada à
+melhoria de serviços públicos digitais. Não é ouvidoria, chatbot, sistema de
+espionagem, ferramenta de identificação individual ou implantação governamental
+completa.
+
+\section*{MVP}
+
+O MVP corresponde às ondas 1, 2 e 3 do sequenciador:
+
+\begin{enumerate}
+    \item base técnica de coleta: sessão anônima, cliques, tempo e formulário
+    estático comparativo;
+    \item detecção e feedback contextual: regra simples, convite contextual,
+    estrelas, atributos, NPS e comentário;
+    \item painel básico: taxa de sessões com dificuldade, ranking de alertas e
+    taxa de resposta dos fluxos.
+\end{enumerate}
+
+\chapter{Fluxo Conceitual do Avaliador de Serviços Públicos}
+
+O fluxo conceitual parte do acesso do cidadão a uma página pública ou a uma
+página de serviço. O script cliente inicia uma sessão técnica anônima, registra
+cliques, página, serviço, origem e instante, e envia os dados para a API. A API
+atualiza métricas da sessão e compara cliques e tempo com as faixas esperadas.
+
+Se os sinais estiverem dentro da faixa esperada, a navegação segue normalmente.
+Se houver excesso de cliques ou tempo, a API registra dificuldade silenciosa para
+o administrador. Em serviços comuns, a navegação pode continuar sem popup. Em
+serviços marcados como prioritários ou de alto tráfego, a API pode retornar uma
+ação para sugerir redirecionamento.
+
+Quando o usuário apresenta dificuldade persistente ou tempo acima da média, a API
+pode retornar ação para abrir uma página simples de feedback. O feedback contém:
+
+\begin{itemize}
+    \item avaliação geral por estrelas;
+    \item seleção de características do problema, como clareza, tempo, esforço,
+    usabilidade, atendimento e eficácia;
+    \item pergunta de NPS;
+    \item comentário opcional.
+\end{itemize}
+
+Ao final, o administrador visualiza alertas, sessões críticas, notas, NPS,
+atributos recorrentes e pontos de melhoria.
+
+\chapter{Endpoints e Indicadores do Protótipo}
+
+O protótipo local usa API HTTP e banco SQLite. Os endpoints principais são:
+
+\begin{itemize}
+    \item \texttt{GET /health}: verifica disponibilidade;
+    \item \texttt{GET /api/services}: lista serviços e regras;
+    \item \texttt{POST /api/events/click}: registra clique;
+    \item \texttt{POST /api/events/page-time}: registra tempo de permanência;
+    \item \texttt{GET /feedback}: exibe formulário de feedback;
+    \item \texttt{POST /api/feedback}: salva avaliação estruturada;
+    \item \texttt{GET /api/admin/alerts}: lista alertas silenciosos;
+    \item \texttt{GET /api/admin/dashboard}: retorna dados agregados.
+\end{itemize}
+
+Os indicadores previstos para o painel são:
+
+\begin{itemize}
+    \item total de alertas;
+    \item sessões com dificuldade;
+    \item serviços com maior recorrência de alertas;
+    \item média de estrelas por serviço;
+    \item NPS por serviço;
+    \item taxa de resposta dos fluxos;
+    \item atributos mais selecionados;
+    \item comentários recentes.
+\end{itemize}
 
 \end{apendicesenv}

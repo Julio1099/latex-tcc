@@ -2,13 +2,33 @@
 
 \section{Contextualização}
 
-Os serviços públicos compõem uma das formas mais diretas de relacionamento entre
-Estado e cidadão. Solicitar um documento, consultar uma situação cadastral,
-acompanhar um benefício, registrar uma demanda ou acessar uma política pública
-são situações em que a experiência do usuário influencia a qualidade percebida da
-administração pública. Com a ampliação do governo digital, parte relevante dessas
-interações passou a ocorrer em portais, aplicações e fluxos de atendimento
-mediados por tecnologia.
+Nas últimas décadas, a relação entre Estado e cidadão passou por uma mudança
+estrutural: atividades que antes dependiam de balcões presenciais, deslocamentos
+e atendimento físico foram progressivamente incorporadas a portais, aplicações e
+fluxos digitais. A plataforma GOV.BR simboliza esse movimento ao concentrar a
+oferta digital de serviços federais e ao reforçar a ideia de que governo digital
+não é apenas troca de canal, mas reorganização da forma como o cidadão encontra,
+solicita, acompanha e avalia serviços públicos.
+
+Os serviços públicos compõem uma das formas mais diretas dessa relação. Solicitar
+um documento, consultar uma situação cadastral, acompanhar um benefício,
+registrar uma demanda ou acessar uma política pública são situações em que a
+experiência do usuário influencia a qualidade percebida da administração
+pública. A digitalização ampliou o alcance e a velocidade desses atendimentos,
+mas também deslocou parte das dificuldades para a própria navegação: localizar o
+serviço correto, entender a linguagem institucional, preencher etapas
+intermediárias e perceber se a solicitação realmente avançou.
+
+A escala dessa transição aparece de forma clara em experiências recentes de
+participação digital. O Plano Plurianual Participativo 2024-2027, por exemplo,
+mobilizou mais de 1,5 milhão de participantes e superou 4 milhões de acessos na
+plataforma Brasil Participativo, demonstrando a capacidade de mobilização do
+ambiente digital. Ao mesmo tempo, a experiência registrou barreiras como
+problemas de conectividade, dificuldade de uso, fluxos de cadastro complexos e
+necessidade de melhor retorno ao cidadão sobre sua contribuição
+\cite{brasilMgi2024ppaParticipativo}. Esse contraste reforça a importância de
+avaliar não apenas se o serviço existe em formato digital, mas como ele é
+percebido e utilizado durante a jornada.
 
 No Brasil, a avaliação dos serviços públicos possui base legal e gerencial. A
 Lei n\textsuperscript{o} 13.460/2017 trata da participação, proteção e defesa dos
@@ -17,7 +37,10 @@ reorientação e o ajuste da prestação estatal \cite{brasil2017lei13460}. O
 Decreto n\textsuperscript{o} 9.094/2017 institui a Carta de Serviços ao Usuário
 e reforça a simplificação do atendimento \cite{brasil2017decreto9094}. A Lei
 n\textsuperscript{o} 14.129/2021 associa governo digital, eficiência pública,
-desburocratização e participação do cidadão \cite{brasil2021lei14129}.
+desburocratização e participação do cidadão \cite{brasil2021lei14129}. O Decreto
+n\textsuperscript{o} 11.260/2022, ao tratar da Estratégia Nacional de Governo
+Digital, reforça esse movimento de organização e monitoramento da transformação
+digital na administração pública federal \cite{brasil2022decreto11260}.
 
 A avaliação da experiência digital, porém, não depende apenas de perguntar ao
 usuário se ele ficou satisfeito ao final do atendimento. Em serviços digitais, a
@@ -45,9 +68,21 @@ Em serviços públicos, a avaliação precisa apoiar participação social,
 transparência, melhoria contínua e priorização de correções. Por isso, o
 avaliador proposto combina interface simples para o cidadão, registro silencioso
 de sinais de dificuldade e visualização administrativa de alertas, sessões
-críticas, notas, NPS e pontos de melhoria.
+críticas, notas, NPS e pontos de melhoria. A versão desenvolvida neste TCC foi
+definida por meio de Lean Inception, usada para delimitar o MVP, suas personas,
+jornadas, funcionalidades e critérios de validação
+\cite{caroli2018leanInception,fowler2022leanInception}.
 
 \section{Problema de Pesquisa}
+
+Apesar do avanço quantitativo na oferta digital de serviços públicos, a avaliação
+da experiência ainda tende a ocorrer tarde, fora do contexto em que a dificuldade
+aparece. Formulários exibidos apenas ao final da jornada, pesquisas esporádicas e
+reclamações registradas depois do problema ajudam a compor diagnósticos, mas nem
+sempre capturam o momento em que o usuário se perde, repete cliques, permanece
+tempo excessivo em uma etapa ou abandona o fluxo. Essa distância entre a
+dificuldade vivida e a leitura institucional do problema reduz a capacidade de
+resposta do gestor \cite{brasilMgi2024ppaParticipativo,govuk2021usingData}.
 
 Modelos oficiais e instrumentos consolidados de avaliação de serviços públicos
 contribuem para a mensuração da satisfação e da qualidade percebida. Ainda assim,
@@ -55,19 +90,24 @@ permanecem desafios relacionados à baixa adesão, ao esforço exigido do usuár
 à transformação das respostas em informação acionável para o gestor. Avaliações
 longas podem reduzir a participação; avaliações curtas podem gerar indicadores
 pouco explicativos; dados de navegação sem interpretação podem produzir apenas
-registros técnicos sem valor gerencial.
+registros técnicos sem valor gerencial. Esses limites dialogam com discussões
+sobre taxa de resposta em pesquisas digitais, uso de dados de desempenho e
+sucesso de sistemas de informação
+\cite{delightedResponseRate,surveymonkeyResponseRate,govuk2021usingData,deloneMclean2003}.
 
 Este trabalho parte da seguinte questão de pesquisa: como propor e prototipar um
 avaliador de serviços públicos digitais que identifique sinais de dificuldade na
-navegação, colete feedback de baixo esforço e organize informações úteis para a
-melhoria dos serviços avaliados?
+navegação, colete feedback contextual de baixo esforço e organize informações
+mais úteis para a melhoria dos serviços avaliados do que um formulário estático
+exibido apenas ao final da jornada?
 
 \section{Objetivo Geral}
 
 Propor e desenvolver um protótipo inicial de avaliador de serviços públicos
 digitais capaz de registrar sinais de dificuldade na navegação, coletar feedback
-estruturado do usuário e apresentar indicadores administrativos que apoiem a
-melhoria contínua dos serviços.
+contextual estruturado, comparar esse fluxo com uma avaliação estática e
+apresentar indicadores administrativos que apoiem a melhoria contínua dos
+serviços.
 
 \section{Objetivos Específicos}
 
@@ -76,14 +116,21 @@ específicos:
 
 \begin{itemize}
     \item levantar fundamentos legais, técnicos e teóricos sobre avaliação de
-    serviços públicos, qualidade percebida, usabilidade e governo digital;
-    \item definir o fluxo de detecção de dificuldade, sugestão de
-    redirecionamento e coleta de feedback para serviços públicos digitais;
+    serviços públicos, qualidade percebida, usabilidade, governo digital e Lean
+    Inception;
+    \item definir, por meio de Lean Inception, o fluxo de detecção de
+    dificuldade, sugestão de redirecionamento e coleta de feedback;
     \item construir um protótipo funcional com API, páginas simuladas de serviço
-    público, formulário de feedback e visualização administrativa;
+    público, feedback contextual, formulário estático comparativo e visualização
+    administrativa;
     \item estruturar os dados e indicadores necessários para apoiar a análise de
-    cliques, tempo de navegação, avaliações, NPS e pontos recorrentes de melhoria.
+    cliques, tempo de navegação, taxa de resposta, avaliações, NPS e pontos
+    recorrentes de melhoria.
 \end{itemize}
+
+A estrutura dos objetivos combina a fundamentação legal e técnica da avaliação de
+serviços públicos com práticas de definição de MVP e prototipação de software
+\cite{brasil2017lei13460,brasil2021lei14129,caroli2018leanInception,Sommerville2007}.
 
 \section{Justificativa}
 
@@ -102,11 +149,15 @@ finalidades compatíveis com o interesse público. Além disso, a combinação e
 eventos de navegação e feedback declarado permite que o gestor observe tanto o
 que o usuário informou quanto o que ocorreu durante a jornada digital.
 
-Do ponto de vista acadêmico, o trabalho aproxima modelos de qualidade de serviço,
+Do ponto de vista técnico-científico, o trabalho aproxima qualidade de serviço,
 experiência do usuário, design centrado no usuário, sucesso de sistemas de
-informação e melhoria de serviços públicos. Do ponto de vista prático, entrega um
-protótipo que materializa a discussão em uma API e em telas navegáveis, servindo
-como base para testes, refinamentos e apresentação à banca.
+informação, prototipação e melhoria pública. Essa aproximação é relevante porque
+o problema não é apenas criar mais um formulário, mas projetar um artefato capaz
+de transformar sinais de navegação e percepções declaradas em dados úteis para
+decisão. Na prática, a contribuição ganha forma em uma API, em telas navegáveis,
+em regras de detecção de dificuldade e em indicadores administrativos que podem
+ser avaliados, criticados e refinados a partir de uma base técnica explícita
+\cite{deloneMclean2003,hevner2004designscience,Sommerville2007}.
 
 \section{Escopo Inicial}
 
@@ -115,10 +166,14 @@ trabalho não pretende implantar um sistema em ambiente governamental real, nem
 substituir instrumentos oficiais de avaliação já existentes. A solução é
 complementar e exploratória: simula páginas de serviço público, registra eventos
 de navegação, aplica regras configuráveis de detecção de dificuldade, abre uma
-coleta simples de feedback e apresenta dados administrativos agregados.
+coleta simples de feedback, oferece formulário estático para comparação e
+apresenta dados administrativos agregados. Essa delimitação segue a lógica de
+prototipação como forma de reduzir incertezas antes de uma solução definitiva e
+mantém cuidado com minimização de dados pessoais
+\cite{Sommerville2007,brasil2018lgpd}.
 
 A validação prevista para esta etapa será preliminar, por análise do protótipo,
-simulação de uso e revisão da coerência entre o fluxo proposto, os fundamentos
+demonstração de uso e revisão da coerência entre o fluxo proposto, os fundamentos
 teóricos e os dados coletados. Testes com usuários reais, integração com portais
 governamentais, calibração estatística das faixas esperadas e avaliação de
 impacto ficam como evolução possível para etapas posteriores.

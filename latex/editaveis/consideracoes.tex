@@ -1,73 +1,163 @@
-\chapter[Considerações sobre os Elementos Textuais]{Considerações sobre os 
-Elementos Textuais}
+\chapter{Considerações Finais}
 
-\section{Introdução}
+Este trabalho teve como objetivo propor e desenvolver um protótipo inicial de
+Avaliador de Serviços Públicos digitais, capaz de registrar sinais de dificuldade
+na navegação, solicitar feedback contextual de baixo esforço e apresentar
+indicadores agregados para apoiar a melhoria dos serviços avaliados. A proposta
+partiu de um problema prático: avaliações exibidas apenas ao final da jornada nem
+sempre capturam o momento em que o usuário se perde, demora ou abandona a busca
+por um serviço.
 
-A regra mais rígida com respeito a Introdução é que a mesma, que é 
-necessariamente parte integrante do texto, não deverá fazer agradecimentos 
-a pessoas ou instituições nem comentários pessoais do autor atinentes à 
-escolha ou à relevância do tema.
+A revisão teórica indicou que a avaliação de serviços públicos precisa combinar
+satisfação, qualidade percebida, efetividade, usabilidade e orientação para
+melhoria. Também reforçou que uma nota geral, isoladamente, explica pouco sobre o
+problema vivido pelo cidadão. Por isso, o protótipo combina dois tipos de dado:
+sinais comportamentais, como cliques e tempo de permanência, e feedback
+declarado, como estrelas, atributos do problema, NPS e comentário opcional.
 
-A Introdução obedece a critérios do Método Cientifico e a exigências 
-didáticas. Na Introdução o leitor deve ser colocado dentro do espírito do 
-trabalho.
+A Lean Inception contribuiu para transformar a ideia inicial em um MVP mais
+delimitado. As dinâmicas de escopo, objetivos, personas, jornadas,
+brainstorming, revisão técnica, sequenciamento e Canvas MVP permitiram separar o
+que deveria entrar na primeira versão do que deveria permanecer como evolução.
+Com isso, o trabalho evitou ampliar o escopo para ouvidoria, chatbot,
+identificação individual, autenticação avançada ou integração real com portais
+governamentais.
 
-Cabe mencionar que a Introdução de um trabalho pode, pelo menos em parte, 
-ser escrita com grande vantagem uma vez concluído o trabalho (ou o 
-Desenvolvimento e as Conclusões terem sido redigidos). Não só a pesquisa 
-costuma modificar-se durante a execução, mas também, ao fim do trabalho, o 
-autor tem melhor perspectiva ou visão de conjunto.
+O protótipo desenvolvido demonstrou a viabilidade técnica do fluxo proposto. A
+solução local registra eventos de navegação, aplica regras explícitas de
+detecção, exibe popup de redirecionamento para serviços prioritários, abre uma
+página de feedback e apresenta dados administrativos agregados. A contribuição do
+artefato está em mostrar como o momento da dificuldade pode ser associado ao
+serviço acessado, ao tipo de sinal observado e ao motivo declarado pelo usuário.
 
-Por seu caráter didático, a Introdução deve, ao seu primeiro parágrafo, 
-sugerir o mais claramente possível o que pretende o autor. Em seguida deve 
-procurar situar o problema a ser examinado em relação ao desenvolvimento 
-científico e técnico do momento. Assim sendo, sempre que pertinente, os 
-seguintes pontos devem ser abordados: 
+\section{Resultados em Relação aos Objetivos}
 
-\begin{itemize}
+O primeiro objetivo específico foi levantar fundamentos legais, técnicos e
+teóricos sobre avaliação de serviços públicos, qualidade percebida, usabilidade,
+governo digital e Lean Inception. Esse objetivo foi atendido no referencial
+teórico, que reuniu legislação brasileira, modelos de avaliação de serviços,
+BRASP, API de avaliação, modelo unificado, experiência do usuário, NPS, métricas
+de navegação, LGPD e fundamentos de Design Science Research.
 
-	\item Contextualização ou apresentação do tema em linhas gerais de 
-	forma clara e objetiva;
-	\item Apresentação da justificativa e/ou relevância do tema escolhido;
-	\item Apresentação da questão ou problema de pesquisa;
-	\item Declaração dos objetivos, gerais e específicos do trabalho;
-	\item Apresentação resumida da metodologia, e
-	\item Indicação de como o trabalho estará organizado.
+O segundo objetivo específico foi definir, por meio de Lean Inception, o fluxo de
+detecção de dificuldade, sugestão de redirecionamento e coleta de feedback. Esse
+resultado aparece na definição do MVP, nas personas, nas jornadas, no
+sequenciamento de funcionalidades e no fluxo conceitual apresentado nos
+apêndices. A Lean Inception ajudou a justificar por que o produto deveria ser um
+mecanismo contextual de apoio à melhoria, e não uma ouvidoria, um chatbot ou um
+sistema completo de atendimento.
 
-\end{itemize}
+O terceiro objetivo específico foi construir um protótipo funcional com API,
+páginas de serviço público, feedback contextual, formulário estático comparativo
+e visualização administrativa. Esse objetivo foi atendido pela implementação do
+servidor local, dos endpoints, das páginas navegáveis, do popup de
+redirecionamento, da tela de feedback com estrelas, atributos, NPS e comentário,
+e do painel administrativo com alertas e indicadores agregados.
 
-\section{Desenvolvimento}
+O quarto objetivo específico foi estruturar os dados e indicadores necessários
+para apoiar a análise de cliques, tempo de navegação, taxa de resposta,
+avaliações, NPS e pontos recorrentes de melhoria. O protótipo já organiza esses
+dados em eventos de clique, eventos de tempo, alertas administrativos e
+feedbacks estruturados. Também disponibiliza endpoints de consulta para o painel.
+A comparação entre avaliação estática e feedback contextual, entretanto, ainda
+não possui resultado estatístico, pois depende de coleta com participantes em
+cenário controlado. Nesta etapa, o resultado concreto foi deixar a estrutura
+técnica preparada para medir essa comparação em uma validação posterior.
 
-O Desenvolvimento (Miolo ou Corpo do Trabalho) é subdividido em seções de 
-acordo com o planejamento do autor. As seções primárias são aquelas que 
-resultam da primeira divisão do texto do documento, geralmente 
-correspondendo a divisão em capítulos. Seções secundárias, terciárias, 
-etc., são aquelas que resultam da divisão do texto de uma seção primária, 
-secundária, terciária, etc., respectivamente.
+\section{Limitações}
 
-As seções primárias são numeradas consecutivamente, seguindo a série 
-natural de números inteiros, a partir de 1, pela ordem de sua sucessão no 
-documento.
+A principal limitação é a ausência de validação com uma amostra real de usuários
+finais. O protótipo permite executar o fluxo completo, mas ainda não mede, com
+base empírica suficiente, se o feedback contextual aumenta a taxa de resposta ou
+melhora a qualidade dos dados quando comparado a um formulário estático.
 
-O Desenvolvimento é a seção mais importante do trabalho, por isso exigi-se 
-organização, objetividade e clareza. É conveniente dividi-lo em pelo menos 
-três partes:
+O desenvolvimento também evidencia uma limitação organizacional. A tecnologia,
+isoladamente, não garante melhoria de serviços públicos. Para que o Avaliador
+gere impacto real, o órgão precisa tratar feedback negativo como insumo de
+aprendizado, definir responsáveis pela análise dos indicadores e transformar os
+alertas em decisões de melhoria. Sem essa rotina institucional, o painel poderia
+se tornar apenas um repositório de sinais de dificuldade e avaliações, sem
+efeito concreto na experiência do cidadão.
 
-\begin{itemize}
+Outra limitação está nos limiares de clique e tempo. Os valores usados no
+backend são operacionais e servem para demonstrar a lógica de detecção:
+dificuldade por clique acima do limite configurado e dificuldade por tempo acima
+de 1,5 vez o tempo médio definido para o serviço. Em uma implantação real, esses
+limiares deveriam ser calibrados com dados históricos, testes de usabilidade e
+análise por tipo de serviço.
 
-	\item Referencial teórico, que corresponde a uma análise dos trabalhos 
-	relevantes, encontrados na pesquisa bibliográfica sobre o assunto. 
-	\item Metodologia, que é a descrição de todos os passos metodológicos 
-	utilizados no trabalho. Sugere-se que se enfatize especialmente em (1) 
-	População ou Sujeitos da pesquisa, (2) Materiais e equipamentos 
-	utilizados e (3) Procedimentos de coleta de dados.
-	\item Resultados, Discussão dos resultados e Conclusões, que é onde se 
-	apresenta os dados encontrados a análise feita pelo autor à luz do 
-	Referencial teórico e as Conclusões.
+Há ainda um desafio ético e de privacidade. Mesmo sem coletar CPF, nome, e-mail
+ou login, padrões de navegação, tempo de permanência, sequência de ações e tipo
+de serviço acessado podem gerar inferências sobre comportamentos de grupos de
+usuários. Por isso, qualquer implantação real deve aplicar rigorosamente os
+princípios da LGPD, especialmente minimização, finalidade, transparência,
+controle de acesso, retenção limitada e anonimização efetiva \cite{brasil2018lgpd}.
 
-\end{itemize}
+Também não houve integração com portais governamentais reais. Essa decisão
+manteve o escopo compatível com o TCC e evitou dependências de autorização
+institucional, segurança, governança e privacidade. Assim, os resultados devem
+ser interpretados como demonstração de viabilidade conceitual e técnica, não como
+comprovação de impacto em produção.
 
-\section{Uso de editores de texto}
+\section{Trabalhos Futuros}
 
-O uso de programas de edição eletrônica de textos é de livre escolha do autor. 
+Os trabalhos futuros devem avançar em três frentes. A primeira é a validação com
+usuários. Para isso, recomenda-se organizar um estudo controlado com dois fluxos:
+no fluxo A, o usuário navega e recebe apenas um formulário estático ao final; no
+fluxo B, o sistema monitora sinais de dificuldade e solicita feedback contextual.
+Essa comparação deve medir taxa de resposta, tempo até a resposta, quantidade de
+atributos selecionados, qualidade dos comentários, taxa de abandono e clareza dos
+dados gerados para o gestor. Só depois dessa coleta será possível afirmar, com
+base empírica, se o feedback contextual supera o formulário estático no cenário
+avaliado.
 
+A segunda frente é a calibração técnica. Os limiares atuais de clique e tempo
+foram definidos para demonstrar o funcionamento do protótipo. Em uma evolução, o
+sistema deve permitir configuração por serviço, por página e por tipo de tarefa.
+Também deve registrar versão das regras, evitar alertas duplicados, separar
+eventos por organização, criar filtros por período e serviço, e apresentar
+métricas comparáveis no painel. Essa etapa aproxima o protótipo de uma solução
+mais robusta de engenharia de software, com regras auditáveis e manutenção mais
+segura.
+
+A terceira frente é a preparação para piloto autorizado. Uma implantação real
+exigiria aviso de coleta, definição de base legal e finalidade, política de
+retenção, controle de acesso ao painel, chave de API, separação por órgão,
+monitoramento de disponibilidade e documentação de integração do script cliente.
+Também seria necessário validar se os indicadores gerados realmente apoiam a
+decisão administrativa, por exemplo, priorização de páginas confusas, revisão de
+linguagem, redução de etapas e reorganização de menus.
+
+\section{Conclusão}
+
+Conclui-se que o Avaliador de Serviços Públicos proposto é uma alternativa
+viável para explorar feedback contextual em serviços digitais. A solução não
+substitui instrumentos oficiais de avaliação, mas pode complementá-los ao
+capturar sinais de dificuldade durante a navegação e relacioná-los a avaliações
+simples feitas pelo usuário. Essa combinação responde ao problema inicial do
+trabalho: avaliações genéricas e tardias podem indicar insatisfação, mas nem
+sempre mostram onde a jornada falhou ou qual característica precisa ser
+melhorada.
+
+O artefato desenvolvido mostra que é tecnicamente possível registrar eventos de
+navegação em uma sessão anônima, aplicar regras de detecção, sugerir
+redirecionamento em serviços prioritários, solicitar feedback de baixo esforço e
+organizar os dados em indicadores administrativos. Mesmo sem validação
+estatística ampla nesta etapa, o protótipo deixa pronta uma base mensurável para
+testar a hipótese em etapa posterior.
+
+O percurso do trabalho também mostra que a solução não nasce apenas de uma
+decisão técnica de implementação. Ela foi delimitada por fundamentos de governo
+digital, qualidade percebida, usabilidade, privacidade e Lean Inception, e por
+artefatos de produto que explicitaram personas, jornadas, escopo, features,
+sequenciamento e critérios de verificação. Isso torna a proposta mais defensável
+como trabalho de Engenharia de Software, pois conecta problema, método, protótipo
+e indicadores.
+
+A principal contribuição do trabalho está na integração entre fundamentos de
+avaliação de serviços públicos, Lean Inception, design centrado no usuário,
+prototipação de software e uma API demonstrável para análise da experiência
+digital. A proposta torna mais concreta a ideia de que a melhoria de serviços
+públicos digitais pode ser apoiada por dados de contexto, desde que esses dados
+sejam coletados com finalidade clara, baixo esforço para o cidadão e respeito à
+privacidade.

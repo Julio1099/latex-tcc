@@ -1,176 +1,164 @@
 \chapter{Metodologia}
 
-Este capítulo descreve o caminho metodológico adotado para transformar o tema do
-avaliador de serviços públicos em uma proposta de solução. A metodologia foi
-organizada em três partes: metodologia do trabalho, metodologia de
-desenvolvimento da solução e solução de análise e desenvolvimento de dados.
+Este capítulo apresenta o caminho seguido para transformar a ideia do Avaliador
+de Serviços Públicos em um protótipo demonstrável. A metodologia combinou
+pesquisa aplicada, revisão bibliográfica e normativa, Design Science Research,
+prototipação incremental e Lean Inception, de modo que a definição do produto e
+a implementação técnica avançassem de forma coerente.
 
-\section{Metodologia do Trabalho}
+\section{Caracterização da Pesquisa}
 
-Este TCC possui natureza aplicada, pois busca construir uma solução computacional
-para um problema relacionado à melhoria de serviços públicos digitais. Quanto aos
-objetivos, a pesquisa é exploratória, uma vez que parte de modelos e normas já
-existentes para propor um artefato inicial, ainda sujeito a validação e
-refinamento.
+A pesquisa é aplicada, pois busca propor uma solução computacional para um
+problema associado à avaliação e melhoria de serviços públicos digitais. Quanto
+aos objetivos, possui caráter exploratório, uma vez que organiza fundamentos
+existentes e os transforma em um artefato inicial, ainda sujeito a validação com
+usuários reais.
 
-A condução do trabalho segue uma abordagem inspirada em Design Science Research.
-Segundo \citeonline{hevner2004designscience}, pesquisas em sistemas de
-informação podem produzir conhecimento por meio da construção e avaliação de
-artefatos, como modelos, métodos, arquiteturas e sistemas. A proposta deste TCC
-se enquadra nessa lógica porque o resultado principal é um protótipo de API e
-interface que materializa uma forma de coletar e analisar sinais de dificuldade
-em serviços públicos digitais.
+A estratégia metodológica se aproxima da Design Science Research. Para
+\citeonline{hevner2004designscience}, pesquisas em sistemas de informação podem
+produzir conhecimento por meio da construção e avaliação de artefatos, como
+modelos, métodos, arquiteturas e sistemas. O artefato deste TCC é um protótipo
+composto por API, páginas simuladas, formulário de feedback e painel
+administrativo.
 
-As etapas metodológicas adotadas foram:
+Foram usadas fontes legais, técnicas e acadêmicas. As fontes legais sustentam a
+avaliação de serviços públicos, governo digital e proteção de dados. As fontes
+técnicas e acadêmicas sustentam qualidade percebida, usabilidade, experiência do
+usuário, avaliação de sistemas de informação, Lean Inception e prototipação.
+
+\section{Lean Inception}
+
+A Lean Inception foi utilizada como protocolo metodológico para alinhar visão de
+produto, escopo e MVP. A abordagem de \citeonline{caroli2018leanInception}
+auxilia equipes a definir o produto certo antes de ampliar o desenvolvimento;
+\citeonline{fowler2022leanInception} também a descreve como uma inception focada
+em compreender funcionalidades, clientes e Canvas MVP. Neste trabalho, a técnica
+organizou a definição do Avaliador de Serviços Públicos e ajudou a transformar a
+ideia inicial em um conjunto priorizado de funcionalidades.
+
+Participaram quatro perfis, cada um com uma perspectiva relevante para o
+problema:
+
+\begin{itemize}
+    \item \textbf{Felipe}, atendimento público, representando dúvidas
+    recorrentes e dificuldades relatadas por cidadãos;
+    \item \textbf{Lucas}, gestão digital, representando a necessidade de
+    indicadores acionáveis para priorização de melhorias;
+    \item \textbf{Diassis}, estudante da UnB, representando viabilidade técnica,
+    escopo acadêmico, segurança e LGPD;
+    \item \textbf{Bruno}, estudante da UnB, representando experiência do usuário,
+    jornada, clareza de interface e validação.
+\end{itemize}
+
+As decisões da Lean Inception orientaram o escopo do MVP, mas não substituem
+testes de usabilidade, coleta com usuários finais ou implantação em portal
+público real. Esses pontos permanecem como etapas necessárias para validação
+externa da solução.
+
+\section{Etapas da Lean Inception}
+
+A agenda da Lean Inception foi organizada para que as funcionalidades surgissem a
+partir da jornada do usuário, e não apenas de possibilidades técnicas. As etapas
+executadas foram:
 
 \begin{enumerate}
-    \item revisão de bases legais, modelos de avaliação de serviços públicos,
-    conceitos de qualidade percebida, satisfação, usabilidade e governo digital;
-    \item definição do problema e dos objetivos com foco em coleta de feedback de
-    baixo esforço e identificação de sinais de dificuldade durante a navegação;
-    \item elaboração do fluxo conceitual da solução, contemplando registro de
-    cliques, análise de tempo, sugestão de redirecionamento e coleta de feedback;
-    \item construção de um protótipo funcional com API, páginas simuladas de
-    serviço público, formulário de avaliação e painel administrativo;
-    \item organização dos dados coletados em indicadores capazes de apoiar a
-    análise de sessões críticas, avaliações, NPS e características recorrentes;
-    \item verificação preliminar por simulação, observando se o fluxo proposto é
-    coerente com os objetivos e se o protótipo permite demonstrar a ideia central.
+    \item \textbf{Kick-off}: alinhamento do problema, da hipótese e dos limites do
+    MVP;
+    \item \textbf{É / Não É / Faz / Não Faz}: delimitação do produto como solução
+    de feedback contextual, não como ouvidoria, chatbot, ferramenta de
+    identificação individual ou sistema governamental completo;
+    \item \textbf{Objetivos do Produto}: definição de objetivos como capturar
+    sinais de dificuldade, solicitar feedback no momento adequado, preservar
+    privacidade e gerar dados acionáveis;
+    \item \textbf{Personas}: definição de Carlos Pereira, cidadão usuário de
+    serviço público digital, e Lucas Almeida, gestor público de serviço digital;
+    \item \textbf{Jornadas}: comparação entre um fluxo com formulário estático ao
+    final e um fluxo com feedback contextual durante a dificuldade;
+    \item \textbf{Brainstorming de features}: levantamento de funcionalidades
+    relacionadas a coleta de sinais, regras, feedback, painel e integração;
+    \item \textbf{Revisão técnica, de negócio e UX}: avaliação relativa de
+    esforço, valor para gestão e impacto na experiência do usuário;
+    \item \textbf{Sequenciador}: organização das funcionalidades em ondas de
+    entrega;
+    \item \textbf{Canvas MVP}: consolidação da menor versão viável para validação
+    inicial.
 \end{enumerate}
 
-A revisão teórica não teve como finalidade esgotar a literatura sobre qualidade
-de serviços. Ela foi direcionada à construção da solução. Foram priorizadas
-fontes normativas brasileiras, modelos de avaliação de serviços públicos, bases
-de usabilidade, design centrado no usuário, métricas de serviços digitais e
-referências de desenvolvimento de software.
+A construção de personas foi baseada na tradição de design centrado no usuário.
+\citeonline{cooper1999inmates} apresenta personas como arquétipos usados para
+orientar decisões de produto. O mapeamento de jornada seguiu a lógica de
+visualização de experiências discutida por \citeonline{kalbach2016mapping}, com
+identificação de pontos de contato, fricções e oportunidades de intervenção.
+As personas também consideraram o cenário brasileiro de uso de tecnologias
+digitais, descrito pela TIC Domicílios 2024 \cite{cetic2025ticDomicilios2024}, e
+a existência de mecanismos oficiais de avaliação de serviços públicos digitais
+\cite{govbrFerramentaAvaliacao}.
 
 \section{Metodologia do Desenvolvimento da Solução}
 
-O desenvolvimento da solução foi conduzido por prototipação incremental. Essa
-estratégia é adequada quando os requisitos ainda estão em amadurecimento e
-quando o artefato precisa ser demonstrado rapidamente para discussão e ajuste.
-Em engenharia de software, protótipos permitem explorar requisitos, reduzir
-incertezas e comunicar alternativas de solução antes de uma implementação
-definitiva \cite{Sommerville2007}.
+O desenvolvimento adotou prototipação incremental. Segundo
+\citeonline{Sommerville2007}, protótipos ajudam a explorar requisitos e reduzir
+incertezas antes de uma solução definitiva. A implementação foi dividida em
+ondas, seguindo o sequenciador da Lean Inception.
 
-O protótipo foi organizado em quatro componentes principais:
+\begin{enumerate}
+    \item \textbf{Onda 1 -- Base técnica de coleta}: sessão técnica anônima,
+    registro de cliques e tempo, e formulário estático comparativo;
+    \item \textbf{Onda 2 -- Detecção e feedback contextual}: regra simples de
+    detecção, feedback contextual e formulário com estrelas, atributos, NPS e
+    comentário opcional;
+    \item \textbf{Onda 3 -- Painel básico}: visualização de sessões com
+    dificuldade, ranking de alertas e taxa de resposta dos fluxos;
+    \item \textbf{Onda 4 -- Incremento de qualidade}: regras por serviço, filtros
+    no painel e comentários recentes;
+    \item \textbf{Onda 5 -- Evolução para piloto controlado}: separação por
+    organização, autenticação, chave de API e script instalável em site real.
+\end{enumerate}
+
+O MVP obrigatório corresponde às três primeiras ondas. Essa decisão mantém a
+solução pequena o suficiente para o escopo acadêmico e, ao mesmo tempo, permite
+testar o fluxo ponta a ponta: o cidadão navega, o sistema detecta dificuldade, o
+feedback contextual é solicitado, os dados são armazenados e o gestor visualiza
+indicadores agregados.
+
+\section{Critérios de Validação}
+
+A hipótese central do MVP é: se o sistema detectar sinais de dificuldade durante
+a navegação e solicitar feedback de baixo esforço no momento certo, então a taxa
+de resposta e a qualidade dos dados coletados serão maiores do que em formulários
+estáticos exibidos apenas ao final da jornada.
+
+Foram definidos os seguintes critérios de validação preliminar:
 
 \begin{itemize}
-    \item \textbf{páginas públicas simuladas}: telas que representam uma página
-    inicial de órgão público e páginas de serviço, com estrutura visual mais
-    próxima de portais governamentais reais;
-    \item \textbf{script cliente}: código executado no navegador para iniciar uma
-    sessão, registrar cliques, registrar tempo de permanência e enviar eventos
-    para a API;
-    \item \textbf{API de avaliação}: backend responsável por receber eventos,
-    atualizar métricas da sessão, aplicar regras de dificuldade e devolver ações
-    para o frontend;
-    \item \textbf{interfaces de retorno}: popup de sugestão de redirecionamento,
-    página de feedback e painel administrativo com dados agregados.
+    \item o protótipo deve registrar cliques, tempo e eventos em uma sessão
+    técnica anônima;
+    \item o convite de feedback contextual deve aparecer apenas quando uma regra
+    de dificuldade for acionada;
+    \item o sistema deve permitir comparar o fluxo A, com formulário estático, e
+    o fluxo B, com feedback contextual;
+    \item o painel deve apresentar pelo menos um gargalo identificável no
+    protótipo;
+    \item a meta preliminar de resposta contextual é de aproximadamente 20\% no
+    cenário de demonstração, valor usado como limiar operacional e não como
+    comprovação estatística definitiva.
 \end{itemize}
 
-O fluxo funcional definido para o protótipo parte do acesso do usuário à página
-inicial do órgão ou à página de um serviço. A partir desse acesso, o script
-cliente inicia uma sessão anônima ou identificada, registra eventos de clique e
-envia os dados para a API. A API atualiza métricas da sessão, como quantidade de
-cliques, páginas visitadas e tempo de permanência. Quando cliques ou tempo ficam
-acima da faixa esperada, a dificuldade é registrada silenciosamente para o
-administrador.
+A meta de 20\% foi adotada porque referências de mercado sobre pesquisas online
+indicam variações amplas de taxa de resposta, com faixas comuns entre 5\% e 30\%
+\cite{delightedResponseRate,surveymonkeyResponseRate}. O valor serve apenas como
+parâmetro inicial para a demonstração.
 
-Serviços marcados como prioritários ou de alto tráfego recebem tratamento
-adicional. Se o usuário apresenta sinais de dificuldade procurando um serviço
-desse tipo, a API pode retornar uma ação de popup sugerindo o redirecionamento
-para a página correta. Caso o usuário aceite, o frontend realiza o
-redirecionamento; caso recuse, a navegação continua. Para evitar interrupções
-repetitivas, o popup deve ser exibido apenas uma vez por sessão, serviço e motivo
-de acionamento.
+\section{Tratamento dos Dados}
 
-Quando a sessão apresenta dificuldade ou tempo acima da média, a API pode
-retornar uma ação para abrir a página de feedback. O formulário utiliza uma
-escala de estrelas para avaliação geral, seleção de características do problema
-e uma pergunta de NPS. A decisão por estrelas e características objetivas busca
-reduzir o esforço de resposta e, ao mesmo tempo, qualificar a causa da
-insatisfação. A pergunta de NPS foi incluída como indicador complementar de
-recomendação, tomando como base a simplicidade do método proposto por
-\citeonline{reichheld2003nps}.
+Os dados do protótipo foram organizados em dois grupos. O primeiro grupo contém
+eventos comportamentais: identificador de sessão, página, serviço, origem do
+evento, clique e tempo de permanência. O segundo contém feedback declarado:
+estrelas, atributos do problema, NPS e comentário opcional.
 
-\section{Solução de Análise e Desenvolvimento de Dados}
-
-A solução de dados foi definida para responder a duas perguntas administrativas:
-onde o usuário demonstra dificuldade e quais aspectos do serviço precisam ser
-priorizados. Para isso, o protótipo combina dados comportamentais, coletados
-durante a navegação, e dados declarativos, informados pelo usuário no feedback.
-
-Os dados comportamentais incluem identificador de sessão, página acessada,
-serviço associado, origem do evento, instante, coordenadas aproximadas do clique,
-quantidade acumulada de cliques e tempo de permanência. Esses dados permitem
-detectar sessões com esforço acima do esperado. Os dados declarativos incluem
-nota por estrelas, características selecionadas, NPS e comentário opcional. Essa
-combinação segue a ideia de que satisfação e qualidade percebida devem ser
-interpretadas por atributos, e não apenas por uma nota geral
-\cite{silva2024atributosApi,iso9241112018}.
-
-\begin{table}[h]
-\centering
-\caption{Dados previstos no protótipo}
-\label{tab:dados-prototipo}
-\begin{tabular}{p{3.4cm} p{5.0cm} p{5.0cm}}
-\hline
-\textbf{Grupo de dados} & \textbf{Exemplos} & \textbf{Uso esperado} \\
-\hline
-Navegação & Sessão, página, serviço, clique, tempo e origem & Detectar esforço
-acima da faixa esperada e registrar dificuldade silenciosa \\
-Feedback & Estrelas, atributos, NPS e comentário opcional & Explicar a percepção
-do usuário e identificar pontos recorrentes de melhoria \\
-Administração & Alertas, sessões críticas, médias, distribuições e recorrência
-de atributos & Apoiar priorização, acompanhamento e tomada de decisão \\
-\hline
-\end{tabular}
-\end{table}
-
-As regras de análise do protótipo são configuráveis. Cada serviço pode possuir
-uma faixa esperada de cliques e tempo, além de uma marcação de prioridade ou alto
-tráfego. Quando a faixa é ultrapassada, o sistema registra um alerta. Em serviços
-comuns, a navegação continua sem popup. Em serviços prioritários, a API pode
-sugerir redirecionamento. Essa diferenciação evita que todo sinal de dificuldade
-gere interrupção para o usuário.
-
-O painel administrativo deve apresentar os resultados de forma agregada. Entre os
-indicadores previstos estão: total de sessões, sessões com dificuldade, serviços
-com maior quantidade de alertas, média de estrelas, distribuição das notas, NPS,
-atributos mais selecionados e comentários recentes. A lógica acompanha a
-orientação de que métricas de serviços digitais devem ser usadas para acompanhar
-desempenho e identificar oportunidades de melhoria \cite{govuk2021usingData}.
-
-Do ponto de vista de privacidade, a solução foi pensada para trabalhar com
-sessões técnicas e dados agregados. A coleta de eventos deve ser limitada ao que
-é necessário para analisar a experiência do serviço, respeitando princípios de
-finalidade, adequação e necessidade previstos na LGPD \cite{brasil2018lgpd}. Em
-uma implantação real, seriam necessários mecanismos adicionais, como aviso de
-coleta, governança de dados, política de retenção, controle de acesso e avaliação
-jurídica.
-
-\section{Base de Fundamentação da Solução}
-
-A resposta à pergunta ``com o que a solução se baseou?'' pode ser organizada em
-cinco grupos de referência. O primeiro grupo é normativo: Lei
-n\textsuperscript{o} 13.460/2017, Decreto n\textsuperscript{o} 9.094/2017, Lei
-n\textsuperscript{o} 14.129/2021 e LGPD, que justificam avaliação, participação,
-governo digital e cuidado com dados. O segundo grupo é técnico-governamental:
-BRASP, Qualidade Gov.br, modelo unificado e estudo dos atributos da API de
-avaliação, que orientam qualidade percebida, satisfação, efetividade e atributos
-de serviço público.
-
-O terceiro grupo é de experiência do usuário: ISO 9241-11 e ISO 9241-210, usadas
-para fundamentar usabilidade e design centrado no usuário. O quarto grupo é de
-avaliação de sistemas e serviços digitais: DeLone e McLean e o Service Manual do
-GOV.UK, que sustentam o uso de métricas de uso, satisfação, conclusão e melhoria
-contínua. O quinto grupo é de desenvolvimento de software e pesquisa aplicada:
-Sommerville e Design Science Research, usados para justificar a construção de um
-protótipo como artefato de pesquisa.
-
-Assim, a proposta não se baseia apenas na comparação com aplicativos privados.
-As avaliações por estrelas, motivos e NPS são referências de interação de baixo
-esforço; a finalidade, os atributos, a análise dos dados e os cuidados de
-governança são fundamentados em avaliação de serviços públicos, governo digital,
-usabilidade, engenharia de software e proteção de dados.
+A análise foi pensada para apoiar o gestor público com indicadores agregados,
+como sessões com dificuldade, alertas por serviço, média de estrelas, NPS e
+atributos recorrentes. A coleta evita nome, CPF, e-mail e login, respeitando a
+lógica de minimização de dados da LGPD \cite{brasil2018lgpd}. Em uma implantação
+real, ainda seriam necessários aviso de coleta, governança, controle de acesso,
+retenção definida e autorização institucional.
